@@ -22,10 +22,10 @@ const app = require("express").Router();
     });
   
     app.put("/api/workouts/:id",(req, res) => {
-      Workout.update(
+      Workout.findByIdAndUpdate(
         req.params.id,
         { $push: {exercises: req.body}},
-        {new: true}
+        {new: true, runValidators: true}
         )
         .then(dbWorkout => {
         res.json(dbWorkout);
